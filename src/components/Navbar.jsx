@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShoppingCart, Home, LogOut, LogIn, UserCircle2, UserPlus } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const formatPrice = (price) => {
   return price.toLocaleString('es-CL', {
@@ -15,6 +16,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">
       <div className="container">
+        <Link to="/" className="navbar-brand">Pizzería Mamma Mia!</Link>
         <div className="navbar-nav me-auto">
           <button className="btn btn-link nav-link d-flex align-items-center gap-2">
             <Home size={20} />
@@ -36,14 +38,8 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <button className="btn btn-link nav-link d-flex align-items-center gap-2">
-                <LogIn size={20} />
-                <span>Login</span>
-              </button>
-              <button className="btn btn-link nav-link d-flex align-items-center gap-2">
-                <UserPlus size={20} />
-                <span>Register</span>
-              </button>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/register" className="nav-link">Register</Link>
             </>
           )}
           <button className="btn btn-success d-flex align-items-center gap-2">
