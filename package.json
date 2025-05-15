@@ -1,19 +1,12 @@
 {
-  "name": "pizzeria",
+  "name": "pizzeria-monorepo",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.0"
+    "dev": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install"
   },
   "devDependencies": {
-    "vite": "^4.0.0",
-    "@vitejs/plugin-react": "^3.0.0"
+    "concurrently": "^7.6.0"
   }
 }

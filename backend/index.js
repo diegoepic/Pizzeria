@@ -1,24 +1,15 @@
-import cors from "cors";
-import "dotenv/config";
-import express from "express";
-
-import authRoute from "./routes/auth.route.js";
-import checkoutRoute from "./routes/checkout.route.js";
-import pizzaRoute from "./routes/pizza.route.js";
+import express from 'express';
+import cors from 'cors';
+import pizzas from './data/pizzas.json' assert { type: 'json' };
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(express.json());
-app.use(cors());
 
-app.use("/api/auth", authRoute);
-app.use("/api/pizzas", pizzaRoute);
-app.use("/api/checkouts", checkoutRoute);
-app.use((_, res) => {
-  res.status(404).json({ error: "Not Found" });
-});
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port http://localhost:${PORT}`);
-});
+app.get('/pizzas', (req, res) => res.json(pizzas));
+
+
+app.listen(PORT, () => console.log(`API on http://localhost:${PORT}`));
