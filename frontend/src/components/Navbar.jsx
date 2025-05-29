@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useUser } from '../context/UserContext';
 
 export default function Navbar() {
-  const { totalItems, totalPrice } = useCart();
+  const { totalItems } = useCart();
   const { token, logout } = useUser();
   return (
     <nav className="navbar">
@@ -12,7 +12,7 @@ export default function Navbar() {
       {token ? (
         <>
           <NavLink to="/profile">Profile</NavLink>
-          <button onClick={logout}>Logout</button>
+          <button onClick={logout} className="btn-logout">Logout</button>
         </>
       ) : (
         <>
@@ -20,7 +20,7 @@ export default function Navbar() {
           <NavLink to="/register">Register</NavLink>
         </>
       )}
-      <NavLink to="/cart">🛒 Cart ({totalItems}) - ${totalPrice}</NavLink>
+      <NavLink to="/cart">🛒 Cart ({totalItems})</NavLink>
     </nav>
   );
 }
