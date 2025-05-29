@@ -28,8 +28,9 @@ app.get('/pizzas', (req, res) => {
   res.json(pizzas);
 });
 
-app.get('/pizzas/:id', (req, res) => {
-  const pizza = pizzas.find(p => p.id === req.params.id);
+app.get('/api/pizzas/:id', (req, res) => {
+  const { id } = req.params;
+  const pizza = pizzas.find(p => p.id === id);
   if (!pizza) {
     return res.status(404).json({ message: 'Pizza no encontrada' });
   }
