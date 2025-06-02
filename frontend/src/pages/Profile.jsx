@@ -1,11 +1,40 @@
-import React from 'react';
+// frontend/src/pages/Profile.jsx
 
-const Profile = () => (
-  <div>
-    <h2>Perfil de Usuario</h2>
-    <p>Email: diegoepic1234@hotmail.com</p>
-    <button>Cerrar sesión</button>
-  </div>
-);
+import React, { useEffect } from 'react';
+import { useUser } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
-export default Profile;
+export default function Profile() {
+  const { email, fetchProfile, logout, profile, loadingProfile } = useUser();
+  const navigate = useNavigate();
+
+  // Si quisiéramos refrescar info al montar:
+  useEffect(() => {
+    if (email) {
+      fetchProfile();
+    } else {
+      navigate('/login');
+    }
+  }, [email]);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  if (loadingProfile) {
+    return <p>Cargando perfil…</p>;
+  }
+
+  if (!email) {
+    return <p>No estás autenticado.</p>;
+  }
+
+  return (
+    <div className="profile-container">
+      <h2>Perfil</h2>
+      <p><strong>Email:</strong> {profile?.email || email}</p>
+      <button onClick={handleLogout}>Cerrar sesión</button>
+    </div>
+  );
+}

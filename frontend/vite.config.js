@@ -7,7 +7,8 @@ export default defineConfig({
     proxy: {
       '/pizzas':  { target: 'http://localhost:3000', changeOrigin: true },
       '/cart':    { target: 'http://localhost:3000', changeOrigin: true },
-      '/api':     { target: 'http://localhost:3000', changeOrigin: true }  
+        '/api/auth':  { target: 'http://localhost:3000', changeOrigin: true },
+      '/api/checkouts': { target: 'http://localhost:3000', changeOrigin: true }
     }
   }
 });
