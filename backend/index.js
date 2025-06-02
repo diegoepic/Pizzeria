@@ -205,6 +205,17 @@ app.delete('/cart/remove/:id', (req, res) => {
   res.json({ success: true, cart });
 });
 
+app.post('/api/checkouts', (req, res) => {
+  const authHeader = req.headers.authorization || '';
+  const token = authHeader.replace('Bearer ', '').trim();
+  // (Opcional) Validar token contra 'tokens[token]' si implementaste mapeo
+  if (!token /* || tokens[token] no existe */) {
+    return res.status(401).json({ success: false, message: 'No autorizado' });
+  }
+  // Aquí podrías procesar req.body.cart (array de pizzas)
+  // Para demo devolvemos éxito directamente:
+  return res.json({ success: true, message: 'Compra procesada correctamente' });
+});
 
 // ——————————————————————————————————————————
 // 6) LEVANTAR SERVIDOR

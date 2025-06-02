@@ -14,9 +14,9 @@ export default function Cart() {
     checkout
   } = useCart();
 
-  const [loading, setLoading]   = useState(false);
+  const [loading, setLoading]    = useState(false);
   const [successMsg, setSuccess] = useState('');
-  const [errorMsg, setError]    = useState('');
+  const [errorMsg, setError]     = useState('');
   const navigate = useNavigate();
 
   const handleCheckout = async () => {
@@ -30,7 +30,7 @@ export default function Cart() {
     if (ok) {
       setSuccess('¡Compra realizada con éxito!');
       clearCart();
-      // opcional: redirigir a Home u otra página:
+      // Si quieres redirigir luego de la compra, descomenta la siguiente línea:
       // navigate('/');
     } else {
       setError(data.message || 'Error al procesar el pago');
